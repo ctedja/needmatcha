@@ -1,324 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
-  <title>Minimal Landing Page</title>
-  <style>
-    :root {
-      --bg: #f9fafb;
-      --text: #111827;
-      --accent: #2F6E5F;
-      --banner-bg: linear-gradient(135deg, #2F6E5F, #76ADA0);
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    * ,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-    }
+    <title>NEEDMATCHA</title>
+    <style>
+        :root {
+            --bg: #f9fafb;
+            --text: #4d4d4d;
+            --accent: #2F6E5F;
+            --banner-bg: linear-gradient(45deg, #fdfbfa, #eaf1ef);
+        }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-    }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            /* font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; */
+            font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+        }
 
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 1rem;
-    }
+        h1 {
+            margin: 0;
+            font-weight: 500;
+        }
 
-    header {
-      background: #ffffff;
-      border-bottom: 1px solid #e5e7eb;
-    }
+        p {
+            margin-top: 0.2em
+        }
 
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.75rem 0;
-    }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
-    .logo {
-      font-weight: 600;
-      font-size: 1.1rem;
-      letter-spacing: 0.03em;
-    }
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
 
-    nav {
-      display: none;
-    }
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+        }
 
-    nav a {
-      margin-left: 1rem;
-      font-size: 0.95rem;
-    }
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+        }
 
-    .nav-toggle {
-      background: none;
-      border: 1px solid #d1d5db;
-      border-radius: 999px;
-      padding: 0.3rem 0.6rem;
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
+        .logo {
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 0.03em;
+        }
 
-    nav.is-open {
-      display: block;
-      margin-top: 0.5rem;
-    }
+        nav {
+            display: none;
+        }
 
-    main {
-      flex: 1;
-    }
+        nav a {
+            margin-left: 1rem;
+            font-size: 0.95rem;
+        }
 
-    .hero {
-      padding: 3rem 0 4rem;
-    }
+        .nav-toggle {
+            background: none;
+            border: 1px solid #d1d5db;
+            border-radius: 999px;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
 
-    .hero .container {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
+        nav.is-open {
+            display: block;
+            margin-top: 0.5rem;
+        }
 
-    .hero-content {
-      max-width: 640px;
-    }
+        main {
+            flex: 1;
+        }
 
-    .hero h1 {
-      margin: 0 0 0.75rem;
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      letter-spacing: -0.02em;
-    }
+        /* HERO */
+        .hero {
+            padding: 0;
+            background: linear-gradient(135deg, #fdfbfa, #eaf1ef);
+            /* background: #fcfdfe; */
+            /* any color */
+        }
 
-    .hero p {
-      margin: 0;
-      font-size: 1rem;
-      color: #4b5563;
-    }
+        .hero .container {
+            position: relative;
+            padding: 0;
+            max-width: 1120px;
+            margin: 0 auto;
+        }
 
-    .hero-actions {
-      margin-top: 1.5rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
+        .hero-visual {
+            position: relative;
+            width: 100%;
+            height: clamp(320px, 55vw, 560px);
+            overflow: hidden;
+        }
 
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.6rem 1.2rem;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: transform 0.1s ease-out, box-shadow 0.1s ease-out,
-        background-color 0.1s ease-out;
-    }
+        .hero-visual img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    .button-primary {
-      background: var(--accent);
-      color: #ffffff;
-      box-shadow: 0 8px 20px rgba(22, 163, 74, 0.25);
-    }
+        .hero-content {
+            position: absolute;
+            z-index: 2;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: min(520px, 80%);
+            color: #4d4d4d;
+        }
 
-    .button-outline {
-      background: #ffffff;
-      color: #111827;
-      border-color: #d1d5db;
-    }
+        .hero-actions {
+            margin-top: 2rem;
+        }
 
-    .button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
-    }
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            border: 0px solid transparent;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: transform 0.1s ease-out, box-shadow 0.1s ease-out,
+                background-color 0.1s ease-out;
+        }
 
-    .bottom-banner {
-      background: var(--banner-bg);
-      color: #ffffff;
-      padding: 1.5rem 0;
-      margin-top: auto;
-    }
+        .button-primary {
+            background: linear-gradient(135deg, #2F6E5F, #76ADA0);
+            color: #ffffff;
+            box-shadow: 0 8px 20px rgba(107, 110, 108, 0.25);
+        }
 
-    .bottom-banner .container {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
+        .button-outline {
+            background: #ffffff;
+            color: #111827;
+            /* border-color: #d1d5db; */
+        }
 
-    .bottom-banner-title {
-      font-weight: 600;
-      font-size: 1.05rem;
-      margin: 0;
-    }
+        .button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+        }
 
-    .bottom-banner-text {
-      margin: 0;
-      font-size: 0.95rem;
-      opacity: 0.9;
-    }
+        .bottom-banner {
+            background: var(--banner-bg);
+            color: #4d4d4d;
+            padding: 1.5rem 0;
+            margin-top: auto;
+        }
 
-    @media (min-width: 768px) {
-      .header-inner {
-        align-items: center;
-      }
+        .bottom-banner .container {
+            /* display: flex;
+            flex-direction: column; */
+            gap: 0.75rem;
+        }
 
-      nav {
-        display: flex;
-      }
+        .bottom-banner-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin: 0;
+        }
 
-      nav.is-open {
-        margin-top: 0;
-      }
+        .bottom-banner-text {
+            margin: 0;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
 
-      .nav-toggle {
-        display: none;
-      }
+        @media (min-width: 768px) {
+            .header-inner {
+                align-items: center;
+            }
 
-      .hero {
-        padding: 4rem 0 5rem;
-      }
+            nav {
+                display: flex;
+            }
 
-      .hero .container {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-      }
+            nav.is-open {
+                margin-top: 0;
+            }
 
-      .hero-visual {
-        flex: 1;
-        min-height: 200px;
-        border-radius: 1rem;
-        border: 1px dashed rgba(148, 163, 184, 0.8);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.85rem;
-        color: #6b7280;
-        padding: 1rem;
-        text-align: center;
-      }
+            .nav-toggle {
+                display: none;
+            }
 
-      .bottom-banner .container {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-      }
-    }
-  </style>
+            .hero {
+                position: relative;
+                overflow: hidden;
+                /* hide the extra width so no scrollbars */
+            }
+
+            /* Image becomes a full-width background behind the content */
+            .hero-visual {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100vw;
+                /* full viewport width */
+                height: clamp(320px, 55vw, 560px);
+                /* same clamp – will sit at 560px on wide screens */
+            }
+
+            .hero-visual img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            /* Container defines the height of the hero, and vertically centers the text */
+            .hero .container {
+                position: relative;
+                max-width: 1120px;
+                margin: 0 auto;
+                padding: 0 1rem;
+                height: clamp(320px, 55vw, 560px);
+                display: flex;
+                align-items: center;
+            }
+
+            /* Text is no longer absolutely positioned; flex handles centering */
+            .hero-content {
+                position: static;
+                transform: none;
+                width: min(520px, 60%);
+                z-index: 1;
+                /* sits above the image */
+            }
+
+            .bottom-banner .container {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+    </style>
 </head>
 
-
-
-
-
-
-
-
-
-
-
-
 <body>
-  <header>
-    <div class="container header-inner">
-      <!-- Logo area -->
-      <div class="logo">
-        <!-- Replace with your logo image if desired -->
-        <img src="assets/needmatcha_logo.png" alt="Logo" style="height:40px;">
-      </div>
+    <header>
+        <div class="container header-inner">
+            <div class="logo">
+                <img src="assets/needmatcha_logo.png" alt="Logo" style="height:40px;">
+            </div>
 
-      <!-- Mobile nav toggle -->
-      <button
-        class="nav-toggle"
-        type="button"
-        aria-label="Toggle navigation"
-        data-nav-toggle
-      >
-        Menu
-      </button>
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" data-nav-toggle>
+                Menu
+            </button>
 
-      <!-- Navigation -->
-      <nav>
-        <a href="#features">Features</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <!-- Large landing / hero section -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <h1>whisking soon...</h1>
-          <p>
-            Use this space for your main message. Briefly explain what your
-            product or service does and why it matters.
-          </p>
-          <div class="hero-actions">
-            <a href="#get-started" class="button button-primary">
-              Get Started
-            </a>
-            <a href="#learn-more" class="button button-outline">
-              Learn More
-            </a>
-          </div>
+            <nav>
+                <!-- <a href="#features">Features</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a> -->
+            </nav>
         </div>
+    </header>
 
-        <!-- Optional visual / illustration placeholder -->
-        <div class="hero-visual">
-                  <img src="assets/hero.png" alt="Logo" style="height:300px;">
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Whisking soon...</h1>
+                    <p>The world's best premium matcha - at your door.</p>
+                    <div class="hero-actions">
+                        <a href="mailto:info@needmatcha.com.au" class="button button-primary">Contact Us</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <img src="assets/web_hero_01_wide.png" alt="Matcha hero">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bottom-banner">
+        <div class="container">
+            <div>
+                <p class="bottom-banner-title">
+                    NEEDMATCHA © AUSTRALIA
+                </p>
+                <p class="bottom-banner-text">
+                    Our team is excited to show you our products - we can't wait to meet you.
+                </p>
+            </div>
         </div>
-      </div>
-    </section>
-  </main>
+    </footer>
 
-  <!-- Bottom banner with customizable CSS background -->
-  <footer class="bottom-banner">
-    <div class="container">
-      <div>
-        <p class="bottom-banner-title">
-          Our team is excited to show you our products - we can't wait to meet you.
-        </p>
-        <p class="bottom-banner-text">
-          This bottom banner stays at the end of the page and uses a customizable
-          CSS background.
-        </p>
-      </div>
-      <a href="#action" class="button button-outline">
-        Take Action
-      </a>
-    </div>
-  </footer>
+    <script>
+        const navToggle = document.querySelector("[data-nav-toggle]");
+        const nav = document.querySelector("header nav");
 
-  <script>
-    const navToggle = document.querySelector("[data-nav-toggle]");
-    const nav = document.querySelector("header nav");
-
-    navToggle.addEventListener("click", () => {
-      nav.classList.toggle("is-open");
-    });
-  </script>
+        navToggle.addEventListener("click", () => {
+            nav.classList.toggle("is-open");
+        });
+    </script>
 </body>
+
 </html>
