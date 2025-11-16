@@ -35,7 +35,8 @@
 
         h1 {
             margin: 0;
-            font-weight: 500;
+            font-weight: 300;
+            font-size: 3rem;
         }
 
         p {
@@ -175,26 +176,29 @@
         .bottom-banner {
             background: var(--banner-bg);
             color: #4d4d4d;
-            padding: 1.5rem 0;
+            padding: 4rem 0;
             margin-top: auto;
+            height: 20vh;
         }
 
         .bottom-banner .container {
-            /* display: flex;
-            flex-direction: column; */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            /* left & right */
             gap: 0.75rem;
         }
 
         .bottom-banner-title {
-            font-weight: 600;
-            font-size: 1.05rem;
+            /* font-weight: 600; */
+            font-size: 0.8rem;
             margin: 0;
         }
 
         .bottom-banner-text {
             margin: 0;
-            font-size: 0.95rem;
-            opacity: 0.9;
+            font-size: 0.8rem;
+            /* opacity: 0.9; */
         }
 
         @media (min-width: 768px) {
@@ -257,11 +261,12 @@
                 z-index: 1;
                 /* sits above the image */
             }
+        }
 
+        @media (max-width: 600px) {
             .bottom-banner .container {
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-between;
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
     </style>
@@ -291,7 +296,7 @@
             <div class="container">
                 <div class="hero-content">
                     <h1>Whisking soon...</h1>
-                    <p>The world's best premium matcha - at your door.</p>
+                    <p>Curating the best products for the Australian market.</p>
                     <div class="hero-actions">
                         <a href="mailto:info@needmatcha.com.au" class="button button-primary">Contact Us</a>
                     </div>
@@ -306,16 +311,15 @@
 
     <footer class="bottom-banner">
         <div class="container">
-            <div>
-                <p class="bottom-banner-title">
-                    NEEDMATCHA © AUSTRALIA
-                </p>
-                <p class="bottom-banner-text">
-                    Our team is excited to show you our products - we can't wait to meet you.
-                </p>
-            </div>
+            <p class="bottom-banner-title">
+                Our team is excited to show you our products – we can't wait to meet you.
+            </p>
+            <p class="bottom-banner-text">
+                NEEDMATCHA © 2025
+            </p>
         </div>
     </footer>
+
 
     <script>
         const navToggle = document.querySelector("[data-nav-toggle]");
