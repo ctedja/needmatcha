@@ -36,11 +36,12 @@
         h1 {
             margin: 0;
             font-weight: 300;
-            font-size: 3rem;
+            font-size: 28px;
         }
 
         p {
-            margin-top: 0.2em
+            margin-top: 0.2em;
+            font-size: 12px;
         }
 
         a {
@@ -218,6 +219,16 @@
                 display: none;
             }
 
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+
+            p {
+                font-size: 1rem;
+            }
+
             .hero {
                 position: relative;
                 overflow: hidden;
@@ -263,11 +274,21 @@
             }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .bottom-banner .container {
                 flex-direction: column;
                 align-items: flex-start;
             }
+
+            .hero-content {
+                width: 50%;
+            }
+
+            .hero-visual {
+                height: clamp(200px, 55vw, 560px);
+                overflow: hidden;
+            }
+
         }
     </style>
 </head>
@@ -278,10 +299,6 @@
             <div class="logo">
                 <img src="assets/needmatcha_logo.png" alt="Logo" style="height:40px;">
             </div>
-
-            <button class="nav-toggle" type="button" aria-label="Toggle navigation" data-nav-toggle>
-                Menu
-            </button>
 
             <nav>
                 <!-- <a href="#features">Features</a>
