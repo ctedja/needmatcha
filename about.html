@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <title>About | NEEDMATCHA</title>
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <style>
+        :root {
+            --color-primary: #2f6e5f;
+            --color-secondary: #76ada0;
+            --color-brown: #986a5b;
+            --color-pink: #edd6ce;
+            --color-light-green: #cfede6;
+            --bg-body: #fdfbfa;
+            --text-body: #4d4d4d;
+            --font-family: "Avenir", "Avenir Next", system-ui, -apple-system, sans-serif;
+            --wrapper-width: 90vw;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-family);
+            background-color: var(--bg-body);
+            color: var(--text-body);
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin: 0;
+            font-weight: 300;
+            color: var(--color-primary);
+        }
+
+        p {
+            margin: 0 0 1rem 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: var(--wrapper-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(6px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .header-inner {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            height: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-size: 0.75rem;
+            color: var(--color-primary);
+        }
+
+        .nav-links a:hover {
+            opacity: 0.7;
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-primary);
+        }
+
+        /* --- ABOUT SECTION --- */
+        .section-about {
+            padding-top: 100px;
+            background-color: var(--bg-body);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-image {
+            width: 100%;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .about-content h1 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* --- FAQ SECTION --- */
+        .section-faq {
+            background-color: white;
+        }
+
+        .section-faq h2 {
+            text-align: left;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eee;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem 0;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1rem;
+            font-family: inherit;
+            color: var(--color-primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            opacity: 0.8;
+        }
+
+        .faq-icon {
+            font-size: 1.25rem;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.open .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+            padding-bottom: 1.5rem;
+        }
+
+        .faq-answer p {
+            margin: 0;
+            color: var(--text-body);
+            line-height: 1.7;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--color-primary);
+            padding: 3rem 0 2rem;
+            color: white;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo img {
+            height: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+        }
+
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 50px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                text-align: center;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container header-inner">
+            <a href="/" class="logo">
+                <img src="assets/needmatcha_logo-11_signature_green_transparent.svg" alt="NEEDMATCHA Logo">
+            </a>
+
+            <button class="mobile-toggle" aria-label="Toggle navigation">☰</button>
+
+            <nav class="nav-links">
+                <a href="/#shop">Shop</a>
+                <a href="/#menu">Menu</a>
+                <a href="/about.html">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="section section-about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="assets/DSC01318_Edit.jpg" alt="NEEDMATCHA">
+                </div>
+                <div class="about-content">
+                    <h1>About Us</h1 <p><b>The world's finest matcha.</b> Straight from Kyoto's tea fields to Sydney's
+                    shores.</p>
+                    <p>Handpicked with a focus on only the most premium tea leaves, our ceremonial-grade matcha is
+                        designed to offer a sprinkle of perfection. We also transform these into delightful drinks for
+                        all to
+                        enjoy at markets across Sydney.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section section-faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What is ceremonial grade matcha?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Ceremonial grade is the highest quality matcha, made from the youngest tea leaves with stems
+                            and veins removed. It's stone-ground into a fine powder with a vibrant green color, smooth
+                            texture, and naturally sweet, umami-rich taste — perfect for drinking on its own or in
+                            lattes.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Where do you source your matcha?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Our matcha comes directly from Kyoto, Japan — the birthplace of matcha production. We partner
+                            with small, family-run farms that have been growing tea for generations.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Where can I find NEEDMATCHA?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We pop up at various farmers markets across Sydney. Follow us on Instagram @needmatcha.au for
+                            our latest locations and schedules. You can also purchase our matcha powder online.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Do you offer dairy-free options?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! We offer oat milk, coconut milk, and almond milk alternatives for all our drinks. Just
+                            let us know your preference when ordering.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How should I store my matcha powder?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Store your matcha in a cool, dark place — ideally in the refrigerator after opening. Keep it
+                            sealed to prevent oxidation and use within 1-2 months for the best flavor and color.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-logo">
+                    <img src="assets/needmatcha_logo-10_signature_white_green.png" alt="Logo">
+                    <p style="margin-top: 1rem; margin-left: 10px; color: rgba(255,255,255,0.7); font-size: 0.9rem;">
+                        Premium matcha, made with love.
+                    </p>
+                </div>
+
+                <div class="footer-col"></div>
+
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <ul class="footer-links">
+                        <a href="https://www.instagram.com/needmatcha.au/">Instagram&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        <a href="https://www.tiktok.com/@needmatcha.au">TikTok&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        <a href="mailto:info@needmatcha.com.au">Email Us</a>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                &copy; 2026 NEEDMATCHA. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.closest('.faq-item');
+                item.classList.toggle('open');
+            });
+        });
+    </script>
+</body>
+
+</html>

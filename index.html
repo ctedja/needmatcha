@@ -4,15 +4,37 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <title>NEEDMATCHA</title>
+    <title>NEEDMATCHA | Premium Matcha in Sydney</title>
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
     <style>
+        /* 
+         * COLOR PALETTE 
+         * Base Color: #2f6e5f (Dark Green)
+         * Secondary Colors: 
+         *   #cfede6 (Lighter green)
+         *   #76ada0 (Medium-light green)
+         *   #986a5b (Brown)
+         *   #edd6ce (Pink)
+         */
+
         :root {
-            --bg: #f9fafb;
-            --text: #4d4d4d;
-            --accent: #2F6E5F;
-            --banner-bg: linear-gradient(45deg, #fdfbfa, #eaf1ef);
+            --color-primary: #2f6e5f;
+            --color-secondary: #76ada0;
+            --color-brown: #986a5b;
+            --color-pink: #edd6ce;
+            --color-light-green: #cfede6;
+
+            --bg-body: #fdfbfa;
+            --text-main: #2f6e5f;
+            --text-body: #4d4d4d;
+
+            --font-family: "Avenir", "Avenir Next", system-ui, -apple-system, sans-serif;
+            --wrapper-width: 90vw;
         }
 
         *,
@@ -21,343 +43,1031 @@
             box-sizing: border-box;
         }
 
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            /* font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; */
-            font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.5;
+        html {
+            scroll-behavior: smooth;
         }
 
-        h1 {
+        body {
+            margin: 0;
+            font-family: var(--font-family);
+            background-color: var(--bg-body);
+            color: var(--text-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             margin: 0;
             font-weight: 300;
-            font-size: 24px;
-            line-height: 1.1;
+            color: var(--color-primary);
+        }
+
+        h2 {
+            font-size: 2.25rem;
+            margin-bottom: 1rem;
+            text-align: center;
         }
 
         p {
-            margin-top: 0.2em;
-            font-size: 11px;
+            margin: 0 0 1rem 0;
         }
 
         a {
-            color: inherit;
             text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
         }
 
         .container {
-            max-width: 1120px;
+            max-width: var(--wrapper-width);
             margin: 0 auto;
-            padding: 0 1rem;
+            padding: 0 1.5rem;
         }
 
+        .section {
+            padding: 5rem 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 400;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #24554a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(47, 110, 95, 0.3);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        /* --- HEADER --- */
         header {
-            background: #ffffff;
-            border-bottom: 1px solid #e5e7eb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0);
+            backdrop-filter: blur(6px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .header-inner {
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0.75rem 0;
         }
 
         .logo {
-            font-weight: 600;
-            font-size: 1.1rem;
-            letter-spacing: 0.03em;
+            height: 30px;
+            display: flex;
+            align-items: center;
         }
 
-        nav {
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-size: 0.75rem;
+            /* font-weight: 500; */
+            color: #ffffff;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-primary);
+        }
+
+        /* --- NAV THEMING --- */
+        .logo-dark {
             display: none;
         }
 
-        nav a {
-            margin-left: 1rem;
-            font-size: 0.95rem;
-        }
-
-        .nav-toggle {
-            background: none;
-            border: 1px solid #d1d5db;
-            border-radius: 999px;
-            padding: 0.3rem 0.6rem;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-
-        nav.is-open {
+        .logo-light {
             display: block;
-            margin-top: 0.5rem;
         }
 
-        main {
-            flex: 1;
+        header.theme-dark .logo-dark {
+            display: block;
         }
 
-        /* HERO */
+        header.theme-dark .logo-light {
+            display: none;
+        }
+
+        header.theme-dark .nav-links a {
+            color: var(--color-primary);
+        }
+
+        header.theme-dark .mobile-toggle {
+            color: var(--color-primary);
+        }
+
+        /* --- HERO --- */
         .hero {
-            padding: 0;
-            background: linear-gradient(135deg, #fdfbfa, #eaf1ef);
-            /* background: #fcfdfe; */
-            /* any color */
+            padding-top: 70px;
+            /* fixed header offset */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+
+            /* FULL-WIDTH BACKGROUND IMAGE */
+            background-image: url('assets/DSC01475_Edit.jpg');
+            background-size: cover;
+            background-position: 60% top;
+            background-repeat: no-repeat;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -5%;
+            width: 40vw;
+            height: 40vw;
+            background: var(--color-light-green);
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            z-index: 0;
         }
 
         .hero .container {
-            position: relative;
-            padding: 0;
-            max-width: 1120px;
-            margin: 0 auto;
+            position: absolute;
+            z-index: 1;
+            text-align: left;
+            left: 5vw;
+            max-width: 720px;
         }
 
-        .hero-visual {
+        .hero-text {
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.5rem, 4vw, 3rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        .hero-text h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            line-height: 1.1;
+            margin-bottom: 0rem;
+            text-align: left;
+            color: #ffffff;
+        }
+
+        .hero-text p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            color: #ffffff;
+            max-width: 480px;
+        }
+
+        /* hero-image CSS removed */
+
+        /* --- SHOP --- */
+        /* .section-shop {
+            background-color: var(--color-primary);
+        } */
+
+        /* --- SHOP VIDEO BACKGROUND --- */
+        .section-shop {
             position: relative;
+            /* anchor for the absolute video */
+            overflow: hidden;
+            /* crop video to section */
+            background: none;
+            /* remove solid color */
+        }
+
+        .shop-bg-video {
+            position: absolute;
+            inset: 0;
+            /* top:0 right:0 bottom:0 left:0 */
             width: 100%;
-            height: clamp(320px, 55vw, 560px);
+            height: 100%;
+            object-fit: cover;
+            /* fill section, crop if needed */
+            z-index: 0;
+        }
+
+        /* optional dark overlay so text/cards pop */
+        .section-shop::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(47, 110, 95, 1), rgba(152, 106, 91, 0.5), rgba(152, 106, 91, 0));
+            /* adjust darkness */
+            z-index: 1;
+        }
+
+        /* keep actual shop content above video + overlay */
+        .section-shop .container {
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            justify-items: center;
+        }
+
+
+        .product-card {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.5) 100%);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 400px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            background-color: rgba(255, 255, 255, 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
         }
 
-        .hero-visual img {
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            /* font-weight: 300; */
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-desc {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            /* font-weight: 700; */
+            color: var(--color-brown);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-buy {
+            width: 100%;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* --- CHECKOUT MODAL --- */
+        .checkout-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .checkout-modal.active {
+            display: flex;
+        }
+
+        .checkout-container {
+            background: white;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow: auto;
+            position: relative;
+        }
+
+        .checkout-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .checkout-header h3 {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .close-modal:hover {
+            color: var(--color-primary);
+        }
+
+        #checkout-form {
+            min-height: 400px;
+            overflow-y: auto;
+        }
+
+        /* --- UPCOMING DATES --- */
+        .section-dates {
+            background-color: white;
+        }
+
+        .dates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .date-card {
+            background: var(--color-light-green);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .date-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .date-month {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--color-brown);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .date-day {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .date-location {
+            font-weight: 400;
+            color: var(--text-body);
+        }
+
+        /* --- MENU --- */
+        .section-menu {
+            position: relative;
+            overflow: hidden;
+            background: none;
+        }
+
+        .menu-bg-video {
             position: absolute;
             inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
+            z-index: 0;
         }
 
-        .hero-content {
+        .section-menu::before {
+            content: "";
             position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                    rgba(76, 53, 46, 0.75) 0%,
+                    rgba(152, 106, 91, 0.55) 50%,
+                    rgba(237, 214, 206, 0.35) 100%);
+            z-index: 1;
+        }
+
+        .section-menu .container {
+            position: relative;
             z-index: 2;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            width: min(520px, 80%);
-            color: #4d4d4d;
         }
 
-        .hero-actions {
-            margin-top: 2rem;
+        .section-menu h2 {
+            color: #fff;
+            text-align: center;
         }
 
-        .button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.6rem 1.2rem;
-            border-radius: 10px;
-            border: 0px solid transparent;
-            font-size: 0.95rem;
+        .section-menu h3 {
+            color: #fff;
+            text-align: center;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .menu-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
             cursor: pointer;
-            transition: transform 0.1s ease-out, box-shadow 0.1s ease-out,
-                background-color 0.1s ease-out;
         }
 
-        .button-primary {
-            background: linear-gradient(135deg, #2F6E5F, #76ADA0);
-            color: #ffffff;
-            box-shadow: 0 8px 20px rgba(107, 110, 108, 0.25);
-        }
-
-        .button-outline {
-            background: #ffffff;
-            color: #111827;
-            /* border-color: #d1d5db; */
-        }
-
-        .button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
-        }
-
-        .bottom-banner {
-            background: var(--banner-bg);
-            color: #4d4d4d;
-            padding: 4rem 0;
-            margin-top: auto;
-            height: 20vh;
-        }
-
-        .bottom-banner .container {
+        .menu-img-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: #ddd;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            /* left & right */
-            gap: 0.75rem;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            transition: height 0.3s ease;
         }
 
-        .bottom-banner-title {
-            /* font-weight: 600; */
-            font-size: 0.8rem;
-            margin: 0;
+        .menu-item:nth-child(1) .menu-img-placeholder {
+            background-color: var(--color-secondary);
         }
 
-        .bottom-banner-text {
-            margin: 0;
-            font-size: 0.8rem;
-            /* opacity: 0.9; */
+        .menu-item:nth-child(2) .menu-img-placeholder {
+            background-color: var(--color-pink);
         }
 
-        @media (min-width: 768px) {
-            .header-inner {
-                align-items: center;
+        .menu-item:nth-child(3) .menu-img-placeholder {
+            background-color: var(--color-light-green);
+        }
+
+        .menu-info {
+            padding: 1.5rem;
+            background: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .menu-title {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .menu-desc {
+            font-size: 0.9rem;
+            color: #666;
+            opacity: 0.8;
+            max-height: 0;
+            text-align: center;
+            overflow: hidden;
+            transition: opacity 0.3s ease, max-height 0.3s ease;
+        }
+
+        .menu-item:hover .menu-desc {
+            opacity: 1;
+            max-height: 100px;
+            /* approximate max height */
+        }
+
+        .menu-link {
+            display: flex;
+            text-align: center;
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 300;
+            background-color: transparent;
+            border: 1px solid #ffffff;
+            padding: 1.5rem 8rem;
+            border-radius: 8px;
+            margin: 1rem auto 0;
+            width: fit-content;
+        }
+
+        .menu-link:hover {
+            text-align: center;
+            font-weight: 500;
+            /* margin: 0 33vw; */
+            /* background-color: var(--color-primary); */
+            backdrop-filter: blur(6px);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(47, 110, 95, 0.3);
+        }
+
+        .menu-link:active {
+            /* transform: translateY(0); */
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo img {
+            height: 50px;
+            /* filter: brightness(0) invert(1); */
+        }
+
+        .footer-col h4 {
+            color: #ffffff;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            font-weight: 300;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+        }
+
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
             }
 
-            nav {
-                display: flex;
-            }
-
-            nav.is-open {
-                margin-top: 0;
-            }
-
-            .nav-toggle {
+            header.hero-active .logo-light {
                 display: none;
             }
 
-
-            h1 {
-                font-size: 2.5rem;
+            header.hero-active .logo-dark {
+                display: block;
             }
 
 
-            p {
-                font-size: 1rem;
+            .header-inner {
+                padding: 0;
             }
 
-            .hero {
-                position: relative;
-                overflow: hidden;
-                /* hide the extra width so no scrollbars */
-            }
-
-            /* Image becomes a full-width background behind the content */
-            .hero-visual {
-                position: absolute;
-                top: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 100vw;
-                /* full viewport width */
-                height: clamp(320px, 55vw, 560px);
-                /* same clamp – will sit at 560px on wide screens */
-            }
-
-            .hero-visual img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            /* Container defines the height of the hero, and vertically centers the text */
-            .hero .container {
-                position: relative;
-                max-width: 1120px;
-                margin: 0 auto;
-                padding: 0 1rem;
-                height: clamp(320px, 55vw, 560px);
-                display: flex;
-                align-items: center;
-            }
-
-            /* Text is no longer absolutely positioned; flex handles centering */
-            .hero-content {
-                position: static;
-                transform: none;
-                width: min(520px, 60%);
-                z-index: 1;
-                /* sits above the image */
-            }
-        }
-
-        @media (max-width: 768px) {
-            .bottom-banner .container {
+            .nav-links {
+                position: fixed;
+                top: 50px;
+                left: 0;
+                right: 0;
+                background: white;
                 flex-direction: column;
-                align-items: flex-start;
+                padding: 2rem;
+                gap: 1.5rem;
+                text-align: center;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                z-index: 999;
+            }
+
+            .nav-links a {
+                color: #4d4d4d;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
             }
 
 
-            .bottom-banner-title {
-                /* font-weight: 600; */
-                font-size: 9px;
-                margin: 0;
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+                margin-top: 65vh;
             }
 
-            .bottom-banner-text {
-                margin: 0;
-                font-size: 9px;
-                /* opacity: 0.9; */
+            .hero-text h1 {
+                font-size: 2.75rem;
+                /* color: var(--color-primary) */
             }
 
-            .hero-content {
-                width: 50%;
+            .hero-text p {
+                margin: 0 auto 2rem;
             }
 
-            .hero-visual {
-                height: clamp(200px, 55vw, 560px);
-                overflow: hidden;
+            .hero-actions {
+                justify-content: center;
             }
 
+            .checkout-container {
+                max-height: 95vh;
+            }
+
+            .menu-link {
+                padding: 1rem 1rem;
+            }
         }
     </style>
 </head>
 
 <body>
+
+    <!-- Header -->
     <header>
         <div class="container header-inner">
-            <div class="logo">
-                <img src="assets/needmatcha_logo.png" alt="Logo" style="height:40px;">
-            </div>
+            <a href="/" class="logo">
+                <img class="logo-light" src="assets/needmatcha_logo-10_signature_white_transparent.svg"
+                    alt="NEEDMATCHA Logo">
+                <img class="logo-dark" src="assets/needmatcha_logo-11_signature_green_transparent.svg"
+                    alt="NEEDMATCHA Logo">
+            </a>
 
-            <nav>
-                <!-- <a href="#features">Features</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a> -->
+            <button class="mobile-toggle" aria-label="Toggle navigation">
+                ☰
+            </button>
+
+            <nav class="nav-links">
+                <a href="#shop">Shop</a>
+                <a href="#menu">Menu</a>
+                <a href="/about.html">About</a>
             </nav>
         </div>
     </header>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1>Whisking soon...</h1>
-                    <p>Curating the best products for the Australian market.</p>
-                    <div class="hero-actions">
-                        <a href="mailto:info@needmatcha.com.au" class="button button-primary">Contact Us</a>
+    <!-- Hero Section -->
+    <section class="hero" data-nav-theme="light">
+        <div class="container">
+            <div class="hero-text">
+                <h2>the<br> matcha<br> you</h2>
+                <h1>need.</h1>
+                <!-- <p>Find us at your nearby Sydney markets!</p> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section id="shop" class="section section-shop" data-nav-theme="light">
+        <video class="shop-bg-video" autoplay muted loop playsinline preload="metadata">
+            <source src="assets/drone_fields.mp4" type="video/mp4">
+        </video>
+        <div class="container">
+            <!-- <p style="text-align: center; max-width: 600px; margin: 0 auto;">Bring the NEEDMATCHA experience home with
+                our premium ceremonial grade matcha.</p> -->
+
+            <div class="shop-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/sachet.png" alt="Premium Ceremonial Matcha">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Premium Matcha Powder</div>
+                        <div class="product-desc">Ceremonial grade matcha, sourced directly from Kyoto, Japan (30g).
+                        </div>
+                        <div class="product-price">$39 AUD</div>
+                        <button id="buy-now-btn" class="btn btn-primary btn-buy">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="checkout-modal">
+        <div class="checkout-container">
+            <div class="checkout-header">
+                <h3>Complete Your Purchase</h3>
+                <button class="close-modal" aria-label="Close">&times;</button>
+            </div>
+            <div id="checkout-form">
+                <!-- Stripe Embedded Checkout will mount here -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Menu -->
+    <section id="menu" class="section section-menu" data-nav-theme="light">
+        <video class="menu-bg-video" autoplay muted loop playsinline preload="metadata">
+            <source src="assets/matcha_powder2.mp4" type="video/mp4">
+        </video>
+
+        <div class="container">
+            <h2>Menu</h2>
+            <h3>How we transform perfect powder into family favourites</h3>
+            <div class="menu-grid">
+                <!-- Item 1 -->
+                <div class="menu-item">
+                    <div class="menu-img-placeholder">
+                        <img src="assets/product_basicbae.png" alt="basicbae"
+                            style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div class="menu-info">
+                        <div class="menu-title">basic bae</div>
+                        <div class="menu-desc">your standard iced matcha latte</div>
                     </div>
                 </div>
 
-                <div class="hero-visual">
-                    <img src="assets/web_hero_01_wide.png" alt="Matcha hero">
+                <!-- Item 2 -->
+                <div class="menu-item">
+                    <div class="menu-img-placeholder">
+                        <img src="assets/product_cloudcoco.png" alt="cloudcoco"
+                            style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div class="menu-info">
+                        <div class="menu-title">cloud coco</div>
+                        <div class="menu-desc">coconut cloud matcha</div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="menu-item">
+                    <div class="menu-img-placeholder">
+                        <img src="assets/product_houjiheaven.png" alt="houjiheaven"
+                            style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div class="menu-info">
+                        <div class="menu-title">houji heaven</div>
+                        <div class="menu-desc">houjicha latte for our down-to-earth friends</div>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
+            <br>
+            <button class="btn menu-link"><a href="/assets/menu.pdf" target="_blank">View Full Menu</a></button>
+        </div>
+    </section>
 
-    <footer class="bottom-banner">
+    <!-- Upcoming Dates -->
+    <section id="dates" class="section section-dates" data-nav-theme="dark">
         <div class="container">
-            <p class="bottom-banner-title">
-                Our team is excited to show you our products – we can't wait to meet you.
-            </p>
-            <p class="bottom-banner-text">
-                NEEDMATCHA © 2025
-            </p>
+            <h2>Catch Us Live</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto;">Come try it for yourself at one of our
+                markets!</p>
+
+            <div class="dates-grid">
+                <!-- Example Date 1 -->
+                <div class="date-card">
+                    <div class="date-month">FEB</div>
+                    <div class="date-day">14</div>
+                    <div class="date-location">Coming Soon</div>
+                    <div style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.8;">10:00 AM - 4:00 PM</div>
+                </div>
+
+                <!-- Example Date 2 -->
+                <div class="date-card">
+                    <div class="date-month">FEB</div>
+                    <div class="date-day">21</div>
+                    <div class="date-location">Coming Soon</div>
+                    <div style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.8;">09:00 AM - 1:00 PM</div>
+                </div>
+
+                <!-- Example Date 3 -->
+                <div class="date-card">
+                    <div class="date-month">MAR</div>
+                    <div class="date-day">05</div>
+                    <div class="date-location">Coming Soon</div>
+                    <div style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.8;">10:00 AM - 4:00 PM</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-logo">
+                    <img src="assets/needmatcha_logo-10_signature_white_green.png" alt="Logo">
+                    <p style="margin-top: 1rem; margin-left: 10px; color: rgba(255,255,255,0.7); font-size: 0.9rem;">
+                        Premium matcha, made with love.
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                </div>
+
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <ul class="footer-links">
+                        <a href="https://www.instagram.com/needmatcha.au/">Instagram&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        <a href="https://www.tiktok.com/@needmatcha.au">TikTok&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        <a href="mailto:info@needmatcha.com.au">Email Us</a>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                &copy; 2026 NEEDMATCHA. All rights reserved.
+            </div>
         </div>
     </footer>
 
+    <!-- Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
 
     <script>
-        const navToggle = document.querySelector("[data-nav-toggle]");
-        const nav = document.querySelector("header nav");
+        // Mobile Navigation Toggle
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const navLinks = document.querySelector('.nav-links');
 
-        navToggle.addEventListener("click", () => {
-            nav.classList.toggle("is-open");
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Dynamic Nav Theme based on section
+        const header = document.querySelector('header');
+        const sections = document.querySelectorAll('[data-nav-theme]');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const theme = entry.target.dataset.navTheme;
+                    const isHero = entry.target.classList.contains('hero');
+
+                    if (window.innerWidth <= 768) {
+                        header.classList.toggle('hero-active', isHero && entry.isIntersecting);
+                    } else {
+                        header.classList.remove('hero-active');
+                    }
+
+                    header.classList.toggle('theme-dark', theme === 'dark');
+                }
+            });
+        }, { rootMargin: '-0% 0px -100% 0px' });
+
+        sections.forEach(section => observer.observe(section));
+
+        // Checkout Modal Functionality
+        const checkoutModal = document.getElementById('checkout-modal');
+        const buyNowBtn = document.getElementById('buy-now-btn');
+        const closeModalBtn = document.querySelector('.close-modal');
+        let checkout = null;
+
+        // Initialize Stripe with your publishable key
+        const stripe = Stripe('pk_test_51SsRTGEhp6hkuKujM938RpaOeo6164swBYJq2xuWuIgSLeWDBPS0zrncqrRX49IIK0E81zyEO0R5fpBOiO8XlWKM00rp2Qt8Gr');
+
+        // Open modal and initialize checkout
+        buyNowBtn.addEventListener('click', async () => {
+            checkoutModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Initialize embedded checkout if not already done
+            if (!checkout) {
+                const fetchClientSecret = async () => {
+                    const response = await fetch('/create-checkout-session', {
+                        method: 'POST',
+                    });
+                    const { clientSecret } = await response.json();
+                    return clientSecret;
+                };
+
+                checkout = await stripe.initEmbeddedCheckout({
+                    fetchClientSecret,
+                });
+
+                checkout.mount('#checkout-form');
+            }
+        });
+
+        // Close modal
+        function closeModal() {
+            checkoutModal.classList.remove('active');
+            document.body.style.overflow = '';
+            // Destroy checkout session when closing to allow fresh session on reopen
+            if (checkout) {
+                checkout.destroy();
+                checkout = null;
+            }
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+
+        // Close modal when clicking outside
+        checkoutModal.addEventListener('click', (e) => {
+            if (e.target === checkoutModal) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && checkoutModal.classList.contains('active')) {
+                closeModal();
+            }
         });
     </script>
 </body>

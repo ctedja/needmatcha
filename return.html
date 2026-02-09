@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <title>Order Confirmed | NEEDMATCHA</title>
+    <style>
+        :root {
+            --color-primary: #2f6e5f;
+            --color-secondary: #76ada0;
+            --color-brown: #986a5b;
+            --color-pink: #edd6ce;
+            --color-light-green: #cfede6;
+            --bg-body: #fdfbfa;
+            --text-main: #2f6e5f;
+            --text-body: #4d4d4d;
+            --font-family: "Avenir", "Avenir Next", system-ui, -apple-system, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-family);
+            background-color: var(--bg-body);
+            color: var(--text-body);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--color-light-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+        }
+
+        .success-icon svg {
+            width: 40px;
+            height: 40px;
+            color: var(--color-primary);
+        }
+
+        h1 {
+            color: var(--color-primary);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-body);
+        }
+
+        #customer-email {
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            margin-top: 1.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #24554a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(47, 110, 95, 0.3);
+        }
+
+        #success {
+            display: none;
+        }
+
+        #success.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <section id="success">
+            <div class="success-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <h1>Thank You for Your Order!</h1>
+            <p>We appreciate your business! A confirmation email will be sent to <span id="customer-email"></span>.</p>
+            <p>If you have any questions, please email <a
+                    href="mailto:info@needmatcha.com.au">info@needmatcha.com.au</a>.</p>
+            <a href="/" class="btn btn-primary">Back to Home</a>
+        </section>
+    </div>
+
+    <script>
+        initialize();
+
+        async function initialize() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const sessionId = urlParams.get('session_id');
+
+            try {
+                const response = await fetch(`/session-status?session_id=${sessionId}`);
+                const session = await response.json();
+
+                if (session.status == 'open') {
+                    window.location.replace('/');
+                } else if (session.status == 'complete') {
+                    document.getElementById('success').classList.add('show');
+                    document.getElementById('customer-email').textContent = session.customer_email;
+                }
+            } catch (error) {
+                console.error('Error fetching session status:', error);
+            }
+        }
+    </script>
+</body>
+
+</html>
