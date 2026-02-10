@@ -12,7 +12,11 @@ stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
 PRICE_ID = os.getenv('PRICE_ID')
 
 app = Flask(__name__)
-CORS(app, origins=["https://needmatcha.com.au", "http://localhost:4242"])
+CORS(app, origins=[
+    "https://needmatcha.com.au",
+    "https://www.needmatcha.com.au",
+    "http://localhost:4242"
+])
 
 YOUR_DOMAIN = os.getenv('YOUR_DOMAIN', 'http://localhost:4242')
 

@@ -447,9 +447,9 @@
     </footer>
 
     <script>
-        // Wake up Render server on load
+        // Wake up Render server on load (retry once after cold start delay)
         fetch('https://needmatcha.onrender.com/health')
-            .catch(err => console.log('Wake-up call failed', err));
+            .catch(() => setTimeout(() => fetch('https://needmatcha.onrender.com/health').catch(() => { }), 3000));
 
         // Mobile Navigation Toggle
         const mobileToggle = document.querySelector('.mobile-toggle');
