@@ -27,13 +27,20 @@ def home():
 @app.route('/create-checkout-session', methods=['POST'])
 def create_checkout_session():
     try:
+        data = request.get_json(silent=True) or {}
+        quantity = data.get('quantity', 1)
+
+        # Basic validation / anti-abuse
+        if not isinstance(quantity, int) or quantity < 1 or quantity > 10:
+            return jsonify(error='Quantity must be an integer between 1 and 10.'), 400
+
         session = stripe.checkout.Session.create(
             ui_mode='embedded',
             payment_method_types=['card'],
             line_items=[
                 {
                     'price': PRICE_ID,
-                    'quantity': 1,
+                    'quantity': quantity,
                 },
             ],
             mode='payment',
