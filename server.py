@@ -1,5 +1,6 @@
 import os
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from dotenv import load_dotenv
 import stripe
 
@@ -10,15 +11,14 @@ stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
 # Product Price ID from Stripe Dashboard
 PRICE_ID = os.getenv('PRICE_ID')
 
-app = Flask(__name__,
-            static_url_path='',
-            static_folder='.')
+app = Flask(__name__)
+CORS(app, origins=["https://needmatcha.com.au", "http://localhost:4242"])
 
 YOUR_DOMAIN = os.getenv('YOUR_DOMAIN', 'http://localhost:4242')
 
 @app.route('/')
 def home():
-    return app.send_static_file('index.html')
+    return "NEEDMATCHA Backend Active"
 
 @app.route('/create-checkout-session', methods=['POST'])
 def create_checkout_session():
@@ -44,6 +44,10 @@ def create_checkout_session():
 def session_status():
     session = stripe.checkout.Session.retrieve(request.args.get('session_id'))
     return jsonify(status=session.status, customer_email=session.customer_details.email)
+
+@app.route('/health', methods=['GET'])
+def health():
+    return jsonify(status="ok")
 
 if __name__ == '__main__':
     app.run(port=4242)

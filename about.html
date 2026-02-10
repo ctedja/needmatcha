@@ -339,8 +339,9 @@
                     <img src="assets/DSC01318_Edit.jpg" alt="NEEDMATCHA">
                 </div>
                 <div class="about-content">
-                    <h1>About Us</h1 <p><b>The world's finest matcha.</b> Straight from Kyoto's tea fields to Sydney's
-                    shores.</p>
+                    <h1>About Us</h1>
+                    <p><b>The world's finest matcha.</b> Straight from Kyoto's tea fields to Sydney's
+                        shores.</p>
                     <p>Handpicked with a focus on only the most premium tea leaves, our ceremonial-grade matcha is
                         designed to offer a sprinkle of perfection. We also transform these into delightful drinks for
                         all to
@@ -446,6 +447,10 @@
     </footer>
 
     <script>
+        // Wake up Render server on load
+        fetch('https://needmatcha.onrender.com/health')
+            .catch(err => console.log('Wake-up call failed', err));
+
         // Mobile Navigation Toggle
         const mobileToggle = document.querySelector('.mobile-toggle');
         const navLinks = document.querySelector('.nav-links');

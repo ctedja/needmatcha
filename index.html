@@ -972,6 +972,10 @@
     <script src="https://js.stripe.com/v3/"></script>
 
     <script>
+        // Wake up Render server on load
+        fetch('https://needmatcha.onrender.com/health')
+            .catch(err => console.log('Wake-up call failed', err));
+
         // Mobile Navigation Toggle
         const mobileToggle = document.querySelector('.mobile-toggle');
         const navLinks = document.querySelector('.nav-links');
@@ -1027,7 +1031,7 @@
             // Initialize embedded checkout if not already done
             if (!checkout) {
                 const fetchClientSecret = async () => {
-                    const response = await fetch('/create-checkout-session', {
+                    const response = await fetch('https://needmatcha.onrender.com/create-checkout-session', {
                         method: 'POST',
                     });
                     const { clientSecret } = await response.json();
