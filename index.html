@@ -417,17 +417,25 @@
 
         .qty-select {
             width: 60px;
-            padding: 0 0.4rem;
+            line-height: 44px;
+            padding: 0 0.6rem;
             border: 1px solid var(--color-primary);
             border-radius: 20px;
             background: white;
             color: var(--color-primary);
             font-family: var(--font-family);
             font-size: 1rem;
-            text-align: center;
             cursor: pointer;
+
             appearance: none;
             -webkit-appearance: none;
+
+            text-align: center;
+            text-align-last: center;
+        }
+
+        .qty-select option {
+            text-align: center;
         }
 
         .qty-select:focus {
