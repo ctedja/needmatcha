@@ -37,6 +37,9 @@ def create_checkout_session():
                 },
             ],
             mode='payment',
+            shipping_address_collection={
+                'allowed_countries': ['AU'],
+            },
             return_url=YOUR_DOMAIN + '/return.html?session_id={CHECKOUT_SESSION_ID}',
         )
     except Exception as e:
