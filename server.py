@@ -33,6 +33,15 @@ def create_checkout_session():
         # Basic validation / anti-abuse
         if not isinstance(quantity, int) or quantity < 1 or quantity > 10:
             return jsonify(error='Quantity must be an integer between 1 and 10.'), 400
+        
+        if quantity > 1:
+            shipping_cost = 0
+            shipping_label = 'Free Shipping'
+            shipping_message = '🎉 Free shipping applied for ordering more than one item!'
+        else:
+            shipping_cost = 1000
+            shipping_label = 'Standard Shipping'
+            shipping_message = '💡 Order 1 more item to unlock Free Shipping!'
 
         session = stripe.checkout.Session.create(
             ui_mode='embedded',
@@ -52,23 +61,20 @@ def create_checkout_session():
                     'shipping_rate_data': {
                         'type': 'fixed_amount',
                         'fixed_amount': {
-                            'amount': 1000,
+                            'amount': shipping_cost,
                             'currency': 'aud',
                         },
-                        'display_name': 'Standard Shipping',
+                        'display_name': shipping_label,
                         'delivery_estimate': {
-                            'minimum': {
-                                'unit': 'business_day',
-                                'value': 2,
-                            },
-                            'maximum': {
-                                'unit': 'business_day',
-                                'value': 5,
-                            },
+                            'minimum': {'unit': 'business_day', 'value': 2},
+                            'maximum': {'unit': 'business_day', 'value': 5},
                         },
                     },
                 },
             ],
+            custom_text={
+                "shipping_address": {"message": shipping_message}
+            },
             return_url=YOUR_DOMAIN + '/return.html?session_id={CHECKOUT_SESSION_ID}',
         )
     except Exception as e:
