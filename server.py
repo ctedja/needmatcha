@@ -36,12 +36,12 @@ def create_checkout_session():
         
         if quantity > 1:
             shipping_cost = 0
-            shipping_label = 'Free Shipping'
-            shipping_message = '🎉 Free shipping applied for ordering more than one item!'
+            shipping_label = '🎉 Free Shipping (for ordering more than one item)'
+            # shipping_message = '🎉 Free shipping applied for ordering more than one item!'
         else:
             shipping_cost = 1000
-            shipping_label = 'Standard Shipping'
-            shipping_message = '💡 Order 1 more item to unlock Free Shipping!'
+            shipping_label = 'Standard Shipping (order 1 more to unlock free shipping!)'
+            # shipping_message = '💡 Order 1 more item to unlock Free Shipping!'
 
         session = stripe.checkout.Session.create(
             ui_mode='embedded',
@@ -72,9 +72,6 @@ def create_checkout_session():
                     },
                 },
             ],
-            custom_text={
-                "shipping_address": {"message": shipping_message}
-            },
             return_url=YOUR_DOMAIN + '/return.html?session_id={CHECKOUT_SESSION_ID}',
         )
     except Exception as e:
