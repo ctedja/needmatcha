@@ -47,6 +47,28 @@ def create_checkout_session():
             shipping_address_collection={
                 'allowed_countries': ['AU'],
             },
+            shipping_options=[
+                {
+                    'shipping_rate_data': {
+                        'type': 'fixed_amount',
+                        'fixed_amount': {
+                            'amount': 1000,
+                            'currency': 'aud',
+                        },
+                        'display_name': 'Standard Shipping',
+                        'delivery_estimate': {
+                            'minimum': {
+                                'unit': 'business_day',
+                                'value': 2,
+                            },
+                            'maximum': {
+                                'unit': 'business_day',
+                                'value': 5,
+                            },
+                        },
+                    },
+                },
+            ],
             return_url=YOUR_DOMAIN + '/return.html?session_id={CHECKOUT_SESSION_ID}',
         )
     except Exception as e:
